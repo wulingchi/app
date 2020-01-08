@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.repay.app.dao.AppOrderMapper">
+  <resultMap id="BaseResultMap" type="com.repay.app.dao.entity.AppOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="received" jdbcType="DECIMAL" property="received" />
+    <result column="prove" jdbcType="VARCHAR" property="prove" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="creater_id" jdbcType="INTEGER" property="creater_id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="updater_id" jdbcType="INTEGER" property="updater_id" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.repay.app.dao.entity.AppOrder">
+    <result column="order_no" jdbcType="VARCHAR" property="order_no" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, fee, received, prove, status, creater_id, create_time, updater_id, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    order_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from app_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.repay.app.dao.entity.AppOrder">
+    insert into app_order (id, type, fee, 
+      received, prove, status, 
+      creater_id, create_time, updater_id, 
+      update_time, order_no)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{fee,jdbcType=DECIMAL}, 
+      #{received,jdbcType=DECIMAL}, #{prove,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{creater_id,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{updater_id,jdbcType=INTEGER}, 
+      #{update_time,jdbcType=TIMESTAMP}, #{order_no,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.repay.app.dao.entity.AppOrder" useGeneratedKeys="true" keyProperty="id">
+    insert into app_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="received != null">
+        received,
+      </if>
+      <if test="prove != null">
+        prove,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="creater_id != null">
+        creater_id,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="updater_id != null">
+        updater_id,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="order_no != null">
+        order_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null">
+        #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="prove != null">
+        #{prove,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creater_id != null">
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater_id != null">
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="order_no != null">
+        #{order_no,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.repay.app.dao.entity.AppOrder">
+    update app_order
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null">
+        received = #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="prove != null">
+        prove = #{prove,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creater_id != null">
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater_id != null">
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="order_no != null">
+        order_no = #{order_no,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.repay.app.dao.entity.AppOrder">
+    update app_order
+    set type = #{type,jdbcType=TINYINT},
+      fee = #{fee,jdbcType=DECIMAL},
+      received = #{received,jdbcType=DECIMAL},
+      prove = #{prove,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creater_id = #{creater_id,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      updater_id = #{updater_id,jdbcType=INTEGER},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      order_no = #{order_no,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.repay.app.dao.entity.AppOrder">
+    update app_order
+    set type = #{type,jdbcType=TINYINT},
+      fee = #{fee,jdbcType=DECIMAL},
+      received = #{received,jdbcType=DECIMAL},
+      prove = #{prove,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creater_id = #{creater_id,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      updater_id = #{updater_id,jdbcType=INTEGER},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      order_no = #{order_no,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id ="getOrderListCount" parameterType="com.repay.app.dto.OrderListDto" resultType="java.lang.Integer">
+      SELECT 
+      	COUNT(id) 
+      FROM app_order o
+	  LEFT JOIN app_user u ON o.creater_id= u.user_id 
+      WHERE 1=1
+      <if test="name != null">
+          AND and (u.user_id LIKE CONCAT("%",#{name},"%") or u.phone LIKE CONCAT("%",#{name},"%"))
+      </if>
+      <if test="type != null">
+          AND o.type = #{type}
+      </if>
+      <if test="startTime != null">
+          AND o.create_time >= #{startTime}
+      </if>
+       <if test="endTime != null">
+          AND CONCAT( #{startTime}," 23:59:59") >= o.create_time
+      </if>
+      <if test="status != null">
+          AND o.status = #{status}
+      </if>
+  </select>
+  
+   <select id ="getOrderList" parameterType="com.repay.app.dto.OrderListDto" resultType="com.repay.app.vo.OrderListVo">
+      SELECT 
+      	o.id,
+      	u.user_id AS userId,
+		u.`name` AS userName,
+		u.phone,
+		o.fee,
+		o.type,
+		o.create_time AS createTime,
+		o.received,
+		o.update_time AS updateTime,
+		o.`status`
+      FROM app_order o
+	  LEFT JOIN app_user u ON o.creater_id= u.user_id 
+      WHERE 1=1
+      <if test="name != null">
+          AND and (u.user_id LIKE CONCAT("%",#{name},"%") or u.phone LIKE CONCAT("%",#{name},"%"))
+      </if>
+      <if test="type != null">
+          AND o.type = #{type}
+      </if>
+      <if test="startTime != null">
+          AND o.create_time >= #{startTime}
+      </if>
+       <if test="endTime != null">
+          AND CONCAT( #{startTime}," 23:59:59") >= o.create_time
+      </if>
+      <if test="status != null">
+          AND o.status = #{status}
+      </if>
+      ORDER BY o.create_time DESC
+      <if test ="startRow != null and pageSize != null">
+        limit #{startRow}, #{pageSize}
+    </if>
+  </select>
+  
+  
+  
+</mapper>

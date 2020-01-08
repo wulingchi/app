@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /app
+spring: 
+  application:
+    name: app-back
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.112.55.156:3306/app?useUnicode=true&characterEncoding=utf8&useSSL=false
+    data-username: root
+    data-password: wlc123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: wlc123456
+      # 初始化大小，最小，最大
+      initial-size: 20
+      min-idle: 10
+      max-active: 50
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # 测试链接
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    database: 0
+    host: 47.112.55.156
+    password: wlc123456
+    port: 6379
+    timeout: 10000ms
+    jedis:
+      pool:
+        max-active: 50
+        max-wait: 1000ms
+        min-idle: 10
+        max-idle: 50
+mybatis:
+  # 映射文件所在路径
+  mapper-locations: classpath:mappers/*Mapper.xml
+  
+file:
+  locations: /home/img/
+  appUrl: http://47.112.55.156:8089/
+

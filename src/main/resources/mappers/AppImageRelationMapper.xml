@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.repay.app.dao.AppImageRelationMapper">
+  <resultMap id="BaseResultMap" type="com.repay.app.dao.entity.AppImageRelation">
+    <id column="relation_id" jdbcType="INTEGER" property="relation_id" />
+    <result column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="bus_id" jdbcType="INTEGER" property="bus_id" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    relation_id, img_id, bus_id, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_image_relation
+    where relation_id = #{relation_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_image_relation
+    where relation_id = #{relation_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.repay.app.dao.entity.AppImageRelation">
+    insert into app_image_relation (relation_id, img_id, bus_id, 
+      type)
+    values (#{relation_id,jdbcType=INTEGER}, #{img_id,jdbcType=INTEGER}, #{bus_id,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.repay.app.dao.entity.AppImageRelation">
+    insert into app_image_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relation_id != null">
+        relation_id,
+      </if>
+      <if test="img_id != null">
+        img_id,
+      </if>
+      <if test="bus_id != null">
+        bus_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relation_id != null">
+        #{relation_id,jdbcType=INTEGER},
+      </if>
+      <if test="img_id != null">
+        #{img_id,jdbcType=INTEGER},
+      </if>
+      <if test="bus_id != null">
+        #{bus_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.repay.app.dao.entity.AppImageRelation">
+    update app_image_relation
+    <set>
+      <if test="img_id != null">
+        img_id = #{img_id,jdbcType=INTEGER},
+      </if>
+      <if test="bus_id != null">
+        bus_id = #{bus_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where relation_id = #{relation_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.repay.app.dao.entity.AppImageRelation">
+    update app_image_relation
+    set img_id = #{img_id,jdbcType=INTEGER},
+      bus_id = #{bus_id,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT}
+    where relation_id = #{relation_id,jdbcType=INTEGER}
+  </update>
+</mapper>
